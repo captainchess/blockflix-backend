@@ -16,11 +16,11 @@ CREATE TABLE movies (
 
 CREATE TABLE reservations (
   id serial PRIMARY KEY,
-  movie_id int NOT NULL,
+  movie_id int NOT NULL REFERENCES movies(id),
   user_id int NOT NULL
 )
 
 CREATE TABLE watchhistory(
   id serial PRIMARY KEY,
-  reservation_id int NOT NULL
+  reservation_id int NOT NULL REFERENCES reservations(id)
 )
