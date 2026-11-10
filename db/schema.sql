@@ -13,3 +13,14 @@ CREATE TABLE movies (
   rating int NOT NULL,
   poster img NOT NULL
 )
+
+CREATE TABLE reservations (
+  id serial PRIMARY KEY,
+  movie_id int NOT NULL,
+  user_id int NOT NULL
+)
+
+CREATE TABLE watchhistory(
+  id serial PRIMARY KEY,
+  reservation_id int NOT NULL
+)
