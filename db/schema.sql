@@ -17,7 +17,7 @@ CREATE TABLE movies (
 CREATE TABLE reservations (
   id serial PRIMARY KEY,
   movie_id int NOT NULL REFERENCES movies(id),
-  user_id int NOT NULL
+  user_id int NOT NULL REFERENCES users(id,)
 )
 
 CREATE TABLE watchhistory(
