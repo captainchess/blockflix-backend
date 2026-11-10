@@ -6,4 +6,10 @@ CREATE TABLE users (
   password text NOT NULL
 );
 
-CREATE TABLE movies
+CREATE TABLE movies (
+  id serial PRIMARY KEY,
+  title text NOT NULL,
+  date date NOT NULL,
+  rating int NOT NULL,
+  poster img NOT NULL
+)
