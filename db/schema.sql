@@ -9,7 +9,7 @@ CREATE TABLE users (
 CREATE TABLE movies (
   id serial PRIMARY KEY,
   title text NOT NULL,
-  date date NOT NULL,
+  year date NOT NULL,
   rating int NOT NULL,
   poster img NOT NULL
 )
@@ -23,4 +23,4 @@ CREATE TABLE reservations (
 CREATE TABLE watchhistory(
   id serial PRIMARY KEY,
   reservation_id int NOT NULL REFERENCES reservations(id)
-)
+);
