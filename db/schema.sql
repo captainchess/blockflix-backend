@@ -6,3 +6,4 @@ CREATE TABLE users (
   password text NOT NULL
 );
 
+CREATE TABLE movies
