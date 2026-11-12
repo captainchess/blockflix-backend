@@ -2,15 +2,13 @@ import express from "express";
 const router = express.Router();
 export default router;
 
-
-
 import requireUser from "#middleware/requireUser";
 import { getMovieById, getMovies } from "#db/queries/movies";
 
 router
     .route("/")
     .get(async(req, res) => {
-        const movies = await getMovies;
+        const movies = await getMovies();
         res.send(movies);
     });
 
