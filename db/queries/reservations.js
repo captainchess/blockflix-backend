@@ -13,3 +13,13 @@ export async function createReservation(movieId, userId) {
   } = await db.query(sql, [movieId, userId]);
   return reservation;
 }
+
+export async function getReservationsByUserId(userId) {
+  const sql = `
+  SELECT * FROM movies
+  JOIN reservations ON movies.id = reservations.user_id
+  WHERE user_id = $1
+  `;
+  const { rows: movies } = await db.query(sql, [userId]);
+  return movies;
+}

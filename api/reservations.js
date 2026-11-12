@@ -11,8 +11,8 @@ import { createReservation } from "#db/queries/reservations";
 router.use(requireUser);
 
 router.get("/", async (req, res) => {
-  const movie = await getMovieById(req.user.id);
-  res.send(movie);
+  const movies = await getReservationsByUserId(req.user.id);
+  res.send(movies);
 });
 
 router.post("/", requireBody(["movieId"]), async (req, res) => {
