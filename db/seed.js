@@ -1,10 +1,6 @@
 import db from "#db/client";
 import { createUser } from "#db/queries/users";
-
-await db.connect();
-await seed();
-await db.end();
-console.log("🌱 Database seeded.");
+import { addToMovies } from "#db/queries/movies";
 
 const movies = [
   {
@@ -409,11 +405,19 @@ const movies = [
   },
 ];
 
+await db.connect();
+await seed();
+await db.end();
+console.log("🌱 Database seeded.");
+
+
+
 async function seed() {
   await createUser("foo", "bar");
-}
 
-for (let i = 0; i < movies.length; i++) {
-  const singleMovie = movies[i];
-  console.log(singleMovie.title);
-}
+  for (let i = 0; i < movies.length; i++) {
+    const singleMovie = movies[i];
+    
+    await addToMovies(singleMovie.title, singleMovie.year, singleMovie.rating, "https://en.wikipedia.org/wiki/Pulp_Fiction#/media/File:Pulp_Fiction_(1994)_poster.jpg");
+  };
+};
