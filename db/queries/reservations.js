@@ -17,7 +17,7 @@ export async function createReservation(movieId, userId) {
 export async function getReservationsByUserId(userId) {
   const sql = `
   SELECT * FROM movies
-  JOIN reservations ON movies.id = reservations.user_id
+  JOIN reservations ON movies.id = reservations.movie_id
   WHERE user_id = $1
   `;
   const { rows: movies } = await db.query(sql, [userId]);
