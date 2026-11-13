@@ -4,6 +4,8 @@ export default app;
 
 import usersRouter from "#api/users";
 import moviesRouter from "#api/movies";
+import reservationsRouter from "#api/reservations";
+import historyRouter from "#api/watchHistory";
 import getUserFromToken from "#middleware/getUserFromToken";
 import handlePostgresErrors from "#middleware/handlePostgresErrors";
 import cors from "cors";
@@ -21,8 +23,9 @@ app.use(getUserFromToken);
 app.get("/", (req, res) => res.send("Hello, World!"));
 
 app.use("/users", usersRouter);
-
 app.use("/movies", moviesRouter);
+app.use("/reservations", reservationsRouter);
+app.use("history", historyRouter);
 
 app.use(handlePostgresErrors);
 app.use((err, req, res, next) => {
