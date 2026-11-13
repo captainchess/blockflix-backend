@@ -4,7 +4,7 @@ const router = express.Router();
 export default router;
 
 import requireUser from "#middleware/requireUser";
-import { addToHistory, gethistory } from "#db/queries/watchHistory";
+import { addToHistory, getHistory } from "#db/queries/watchHistory";
 
 router.use(requireUser);
 
@@ -20,6 +20,6 @@ router
 router
     .route("/")
     .get(async(req, res) => {
-        const movies = await gethistory(req.user.id);
+        const movies = await getHistory(req.user.id);
         res.send(movies);
     });

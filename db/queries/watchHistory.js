@@ -14,7 +14,7 @@ export async function addToHistory(resId) {
   return reservation;
 }
 
-export async function gethistory(id) {
+export async function getHistory(id) {
   const sql = `
     SELECT * FROM movies
     JOIN reservations ON movies.id = reservations.movie_id
