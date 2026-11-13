@@ -19,7 +19,7 @@ export async function gethistory(id) {
     SELECT * FROM movies
     JOIN reservations ON movies.id = reservations.movie_id
     JOIN watchhistory ON reservations.id = watchhistory.reservation_id
-    WHERE reservations.users_id = $1
+    WHERE reservations.user_id = $1
     `;
   const { rows: reservations } = await db.query(sql, [id]);
   return reservations;
