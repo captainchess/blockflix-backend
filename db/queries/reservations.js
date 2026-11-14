@@ -23,3 +23,12 @@ export async function getReservationsByUserId(userId) {
   const { rows: movies } = await db.query(sql, [userId]);
   return movies;
 } 
+export async function getReservation(movieId, userId ) {
+  const sql = `
+  SELECT * FROM reservations
+  WHERE user_id = $1 
+  AND movie_id = $2
+  `;
+  const { rows: [reservation] } = await db.query(sql, [movieId, userId]);
+  return reservation;
+}
