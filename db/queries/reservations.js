@@ -22,4 +22,4 @@ export async function getReservationsByUserId(userId) {
   `;
   const { rows: movies } = await db.query(sql, [userId]);
   return movies;
-}
+} 
