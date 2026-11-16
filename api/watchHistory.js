@@ -10,7 +10,7 @@ router.use(requireUser);
 
 router
     .route("/")
-    .post(requireBody(["reservationId"]), async(req, res) => {
+    .post(requireBody(["reservation_id"]), async(req, res) => {
         const { resId } = req.body;
 
         const movie = await addToHistory(resId);
