@@ -16,14 +16,14 @@ export async function createReservation(movieId, userId) {
 
 export async function getReservationsByUserId(userId) {
   const sql = `
-  SELECT * FROM movies
+  SELECT movies.* FROM movies
   JOIN reservations ON movies.id = reservations.movie_id
   WHERE user_id = $1
   `;
   const { rows: movies } = await db.query(sql, [userId]);
   return movies;
 } 
-export async function getReservation(movieId, userId ) {
+export async function getReservation(movieId, userId) {
   const sql = `
   SELECT * FROM reservations
   WHERE user_id = $1 
