@@ -10,10 +10,10 @@ router.use(requireUser);
 
 router
     .route("/")
-    .post(requireBody(["reservation_id"]), async(req, res) => {
-        const { resId } = req.body;
+    .post(requireBody(["reservationId"]), async(req, res) => {
+        const { reservationId } = req.body;
 
-        const movie = await addToHistory(resId);
+        const movie = await addToHistory(reservationId);
         res.status(201).send(movie);
     });
 
