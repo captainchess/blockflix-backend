@@ -4,7 +4,11 @@ export default router;
 
 import requireUser from "#middleware/requireUser";
 import requireBody from "#middleware/requireBody";
-import { createReservation, getReservation, getReservationsByUserId } from "#db/queries/reservations";
+import {
+  createReservation,
+  getReservation,
+  getReservationsByUserId,
+} from "#db/queries/reservations";
 
 router.use(requireUser);
 
@@ -19,8 +23,13 @@ router.post("/", requireBody(["movieId"]), async (req, res) => {
   res.status(201).send(reservation);
 });
 
-router.get("/:id", async(req, res) => {
+router.get("/:id", async (req, res) => {
   const { movieId } = req.params;
   const reservation = await getReservation(movieId, req.user.id);
   res.status(201).send(reservation);
-})
+});
+
+router.delete("/:id", async (req, res) => {
+  await deleteReservationById(req.task.id);
+  res.sendStatus(204);
+});
