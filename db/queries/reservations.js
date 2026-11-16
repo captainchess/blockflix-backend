@@ -28,6 +28,7 @@ export async function getReservation(movieId, userId ) {
   SELECT * FROM reservations
   WHERE user_id = $1 
   AND movie_id = $2
+  LIMIT 1
   `;
   const { rows: [reservation] } = await db.query(sql, [movieId, userId]);
   return reservation;
