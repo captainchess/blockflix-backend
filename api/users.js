@@ -2,8 +2,13 @@ import express from "express";
 const router = express.Router();
 export default router;
 
-import { createUser, getUserById, getUserByUsernameAndPassword } from "#db/queries/users";
+import {
+  createUser,
+  getUserById,
+  getUserByUsernameAndPassword,
+} from "#db/queries/users";
 import requireBody from "#middleware/requireBody";
+import requireUser from "#middleware/requireUser";
 import { createToken } from "#utils/jwt";
 
 router
@@ -27,12 +32,9 @@ router
     res.send(token);
   });
 
-router
-  .route("/:id")
-  .get(async(req, res) => {
-    const { id } = req.params;
-    const user = await getUserById(id);
-    if (!user) return res.send("No user found.");
+router.route("/me").get(requireUser, async (req, res) => {
+  const user = await getUserById(req.user.id);
+  if (!user) return res.send("No user found.");
 
-    res.send(user);
-  })
+  res.send(user);
+});
