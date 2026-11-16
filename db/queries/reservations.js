@@ -22,11 +22,7 @@ export async function getReservationsByUserId(userId) {
   `;
   const { rows: movies } = await db.query(sql, [userId]);
   return movies;
-<<<<<<< HEAD
 }
-=======
-} 
->>>>>>> 81d2f2a7164b91a4bddd608b898564a7e32fb8fd
 export async function getReservation(movieId, userId) {
   const sql = `
   SELECT * FROM reservations

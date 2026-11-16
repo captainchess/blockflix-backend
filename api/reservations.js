@@ -30,6 +30,7 @@ router.get("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  await deleteReservationById(req.task.id);
+  const { id } = req.params;
+  await deleteReservationById(id);
   res.sendStatus(204);
 });
