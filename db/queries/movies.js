@@ -31,3 +31,13 @@ export async function getMovieById(id) {
   const { rows: [movie] } = await db.query(sql, [id]);
   return movie;
 }
+
+export async function getMoviesInReservationsByUserId(userId) {
+  const sql = `
+  SELECT movies.* FROM movies
+  JOIN reservations ON movies.id = reservations.movie_id
+  WHERE user_id = $1
+  `;
+  const { rows: movies } = await db.query(sql, [userId]);
+  return movies;
+}

@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS watchhistory;
 DROP TABLE IF EXISTS reservations;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS movies;
