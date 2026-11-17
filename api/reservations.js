@@ -20,12 +20,6 @@ router.get("/", async (req, res) => {
   res.send(movies);
 });
 
-router.get("/:id", async(req, res) => {
-  const { id } = req.params;
-  const reservation = await getReservation(id, req.user.id);
-  res.send(reservation);
-}); 
-
 /** add movie and user to reservations */
 router.post("/", requireBody(["movieId"]), async (req, res) => {
   const { movieId } = req.body;

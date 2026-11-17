@@ -25,7 +25,6 @@ router.route("/:id").get(async (req, res) => {
   res.send(req.movie);
 });
 
-/** Change this route in frontend when fetching to match the updated route */
 router.get("/:movieId/reservations", async (req, res) => {
   const { movieId } = req.params;
   const reservation = await getReservation(movieId, req.user.id);
