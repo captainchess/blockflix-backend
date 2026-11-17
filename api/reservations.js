@@ -5,7 +5,6 @@ export default router;
 import requireUser from "#middleware/requireUser";
 import requireBody from "#middleware/requireBody";
 import {
-  deleteReservationById,
   createReservation,
   getReservation,
   getReservationsByUserId,
