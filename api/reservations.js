@@ -23,10 +23,10 @@ router.post("/", requireBody(["movieId"]), async (req, res) => {
   res.status(201).send(reservation);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:movieId", async (req, res) => {
   const { movieId } = req.params;
   const reservation = await getReservation(movieId, req.user.id);
-  res.status(201).send(reservation);
+  res.send(reservation);
 });
 
 router.delete("/:id", async (req, res) => {
