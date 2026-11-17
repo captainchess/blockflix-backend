@@ -410,7 +410,9 @@ async function seed() {
   }
 
   for (let j = 0; j < 10; j++) {
-    const randomIndex = Math.floor(Math.random() * createdMovies.length);
+    const randomIndex = Math.floor(Math.random() * movies.length);
+    const randomMovie = movies[randomIndex];
+
     await addToReservations(user.id, randomMovie.id);
   }
 }
