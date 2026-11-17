@@ -9,6 +9,7 @@ import {
   createReservation,
   getReservation,
   getReservationsByUserId,
+  deleteReservationById,
 } from "#db/queries/reservations";
 
 router.use(requireUser);
@@ -31,7 +32,8 @@ router.get("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  await deleteReservationById(id);
+  const movieId = req.params.id;
+  const userId = req.user.id;
+  await deleteReservationById(userId, movieId);
   res.sendStatus(204);
 });
