@@ -1,16 +1,16 @@
 import db from "#db/client";
 
-export async function createReservation(movieId, userId) {
+export async function createReservation(movieId, userId, reserved, watched) {
   const sql = `
   INSERT INTO reservations
-    (movie_id, user_id)
+    (movie_id, user_id, is_reserved, is_watched)
   VALUES
-    ($1, $2)
+    ($1, $2, $3, $4)
   RETURNING *
   `;
   const {
     rows: [reservation],
-  } = await db.query(sql, [movieId, userId]);
+  } = await db.query(sql, [movieId, userId, reserved, watched]);
   return reservation;
 }
 

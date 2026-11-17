@@ -1,6 +1,7 @@
 import db from "#db/client";
 import { createUser } from "#db/queries/users";
 import { addToMovies } from "#db/queries/movies";
+import { createReservation } from "./queries/reservations";
 
 const movies = [
   {
@@ -413,6 +414,6 @@ async function seed() {
     const randomIndex = Math.floor(Math.random() * movies.length);
     const randomMovie = movies[randomIndex];
 
-    await addToReservations(user.id, randomMovie.id);
+    await createReservation(user.id, randomMovie.id, true, true);
   }
 }
