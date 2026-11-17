@@ -20,10 +20,7 @@ CREATE TABLE movies (
 CREATE TABLE reservations (
   id serial PRIMARY KEY,
   movie_id int NOT NULL REFERENCES movies(id) ON DELETE CASCADE,
-  user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE watchhistory (
-  id serial PRIMARY KEY,
-  reservation_id int NOT NULL REFERENCES reservations(id) ON DELETE CASCADE
+  user_id int NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  is_reserved boolean NOT NULL,
+  is_watched boolean NOT NULL
 );
