@@ -399,8 +399,6 @@ console.log("🌱 Database seeded.");
 async function seed() {
   const user = await createUser("foo", "bar");
 
-  const createdMovies = [];
-
   for (let i = 0; i < movies.length; i++) {
     const singleMovie = movies[i];
     const addedMovie = await addToMovies(
@@ -409,14 +407,10 @@ async function seed() {
       singleMovie.rating,
       singleMovie.poster,
     );
-
-    createdMovies.push(addedMovie);
   }
 
   for (let j = 0; j < 10; j++) {
     const randomIndex = Math.floor(Math.random() * createdMovies.length);
-    const randomMovie = createdMovies[randomIndex];
-
     await addToReservations(user.id, randomMovie.id);
   }
 }
