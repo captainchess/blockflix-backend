@@ -26,8 +26,8 @@ export async function getReservationsByUserId(userId) {
 export async function getReservation(movieId, userId) {
   const sql = `
   SELECT * FROM reservations
-  WHERE user_id = $1 
-  AND movie_id = $2
+  WHERE movie_id = $1 
+  AND user_id = $2
   LIMIT 1
   `;
   const {
