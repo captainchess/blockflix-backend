@@ -41,7 +41,7 @@ export async function getMoviesInReservationsByUserId(userId) {
   const { rows: movies } = await db.query(sql, [userId]);
   return movies;
 }
-/*
+
 export async function getMovieInReservations(userId, movieId) {
   const sql = `
   SELECT movies.* FROM movies
@@ -53,4 +53,3 @@ export async function getMovieInReservations(userId, movieId) {
   const { rows: [movie] } = await db.query(sql, [userId, movieId]);
   return movie;
 }
-*/
