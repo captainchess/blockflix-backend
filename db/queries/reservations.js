@@ -19,6 +19,7 @@ export async function getReservation(movieId, userId) {
   SELECT * FROM reservations
   WHERE movie_id = $1 
   AND user_id = $2
+  AND is_reserved = true
   LIMIT 1
   `;
   const {
