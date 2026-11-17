@@ -35,10 +35,11 @@ export async function getReservation(movieId, userId) {
   } = await db.query(sql, [movieId, userId]);
   return reservation;
 }
-export async function deleteReservationById(id) {
+export async function deleteReservationById(userId, movieId) {
   const sql = `
   DELETE FROM reservations
-  WHERE id = $1
+  WHERE user_id = $1
+  AND movie_id = $2
   `;
-  await db.query(sql, [id]);
+  await db.query(sql, [userId, movieId]);
 }
