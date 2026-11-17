@@ -13,7 +13,7 @@ CREATE TABLE movies (
   id serial PRIMARY KEY,
   title text NOT NULL,
   year int NOT NULL,
-  rating real NOT NULL,
+  rating decimal(3, 2) NOT NULL,
   poster text NOT NULL
 );
 
