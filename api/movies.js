@@ -3,8 +3,7 @@ const router = express.Router();
 export default router;
 
 import requireUser from "#middleware/requireUser";
-import { getMovieById, getMovies } from "#db/queries/movies";
-import { getReservation } from "#db/queries/reservations";
+import { getMovieById, getMovies, getMoviesInReservationsByUserId, getMovieInReservations } from "#db/queries/movies";
 
 router.use(requireUser);
 
@@ -25,9 +24,14 @@ router.route("/:id").get(async (req, res) => {
   res.send(req.movie);
 });
 
-/** Change this route in frontend when fetching to match the updated route */
+/** Get the users reserved movies */
+router.get("/reservations", async (req, res) => {
+  const movies = await getMoviesInReservationsByUserId(req.user.id);
+  res.send(movies);
+});
+
 router.get("/:movieId/reservations", async (req, res) => {
   const { movieId } = req.params;
-  const reservation = await getReservation(movieId, req.user.id);
+  const reservation = await getMovieInReservations(req.user.id, movieId);
   res.send(reservation);
 });

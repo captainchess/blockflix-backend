@@ -7,17 +7,16 @@ import requireBody from "#middleware/requireBody";
 import {
   createReservation,
   deleteReservationById,
+  getReservation,
 } from "#db/queries/reservations";
-
-import { getMoviesInReservationsByUserId } from "#db/queries/movies";
 
 router.use(requireUser);
 
-/** Get the users reserved movies */
-router.get("/", async (req, res) => {
-  const movies = await getMoviesInReservationsByUserId(req.user.id);
-  res.send(movies);
-});
+router.get("/:id", async(req, res) => {
+  const movieId = req.params.id;
+  const reservation = await getReservation(movieId, req.user.id);
+  res.send(reservation);
+}); 
 
 /** add movie and user to reservations */
 router.post("/", requireBody(["movieId"]), async (req, res) => {

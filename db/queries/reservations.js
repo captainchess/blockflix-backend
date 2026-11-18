@@ -19,13 +19,17 @@ export async function getReservation(movieId, userId) {
   SELECT * FROM reservations
   WHERE movie_id = $1 
   AND user_id = $2
+  AND is_reserved = true
   LIMIT 1
   `;
   const {
     rows: [reservation],
   } = await db.query(sql, [movieId, userId]);
+  if(!reservation) return null;
+  
   return reservation;
 }
+
 export async function deleteReservationById(userId, movieId) {
   const sql = `
   DELETE FROM reservations
