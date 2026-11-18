@@ -1,7 +1,7 @@
 import db from "#db/client";
 import { createUser } from "#db/queries/users";
-import { createMovie } from "#db/queries/movies";
-import { createReservation } from "./queries/reservations";
+import { createMovie, getMovieById } from "#db/queries/movies";
+import { createReservation } from "#db/queries/reservations";
 
 const movies = [
   {
@@ -399,6 +399,7 @@ console.log("🌱 Database seeded.");
 
 async function seed() {
   const user = await createUser("foo", "bar");
+  console.debug(user);
 
   for (let i = 0; i < movies.length; i++) {
     const singleMovie = movies[i];
@@ -412,8 +413,9 @@ async function seed() {
 
   for (let j = 0; j < 10; j++) {
     const randomIndex = Math.floor(Math.random() * movies.length);
-    const randomMovie = movies[randomIndex];
+    const randomMovie = await getMovieById(randomIndex);
+    console.debug(randomMovie);
 
-    await createReservation(user.id, randomMovie.id, true, true);
+    await createReservation(randomMovie.id, user.id, true, true);
   }
 }
