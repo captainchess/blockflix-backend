@@ -21,7 +21,7 @@ router.get("/:id", async(req, res) => {
 /** add movie and user to reservations */
 router.post("/", requireBody(["movieId"]), async (req, res) => {
   const { movieId } = req.body;
-  const reservation = await createReservation(movieId, req.user.id);
+  const reservation = await createReservation(movieId, req.user.id, true, false);
   res.status(201).send(reservation);
 });
 
