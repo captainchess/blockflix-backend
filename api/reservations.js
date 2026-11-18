@@ -14,12 +14,6 @@ import { getMoviesInReservationsByUserId } from "#db/queries/movies";
 
 router.use(requireUser);
 
-/** Get the users reserved movies */
-router.get("/", async (req, res) => {
-  const movies = await getMoviesInReservationsByUserId(req.user.id);
-  res.send(movies);
-});
-
 router.get("/:id", async(req, res) => {
   const { id } = req.params;
   const reservation = await getReservation(id, req.user.id);
