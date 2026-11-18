@@ -10,13 +10,11 @@ import {
   getReservation,
 } from "#db/queries/reservations";
 
-import { getMoviesInReservationsByUserId } from "#db/queries/movies";
-
 router.use(requireUser);
 
 router.get("/:id", async(req, res) => {
-  const { id } = req.params;
-  const reservation = await getReservation(id, req.user.id);
+  const movieId = req.params.id;
+  const reservation = await getReservation(movieId, req.user.id);
   res.send(reservation);
 }); 
 
