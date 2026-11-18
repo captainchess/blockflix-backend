@@ -25,8 +25,23 @@ export async function getReservation(movieId, userId) {
   const {
     rows: [reservation],
   } = await db.query(sql, [movieId, userId]);
-  if(!reservation) return null;
-  
+  if (!reservation) return null;
+
+  return reservation;
+}
+
+export async function updateWatched(watched, userId, movieId) {
+  const sql = `
+  UPDATE reservations
+  SET is_watched = $1
+  WHERE user_id = $2
+  AND movie_id = $3
+  RETURNING *
+  `;
+  const {
+    rows: [reservation],
+  } = await db.query(sql, [watched, userId, movieId]);
+  if (!reservation) return null;
   return reservation;
 }
 
