@@ -8,6 +8,7 @@ import {
   createReservation,
   deleteReservationById,
   getReservation,
+  updateWatched
 } from "#db/queries/reservations";
 
 router.use(requireUser);
