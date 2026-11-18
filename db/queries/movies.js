@@ -39,6 +39,7 @@ export async function getMoviesInReservationsByUserId(userId) {
   WHERE user_id = $1
   `;
   const { rows: movies } = await db.query(sql, [userId]);
+  if (!movies) return null;
   return movies;
 }
 

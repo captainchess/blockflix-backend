@@ -8,21 +8,34 @@ import {
   createReservation,
   deleteReservationById,
   getReservation,
+  updateWatched
 } from "#db/queries/reservations";
 
 router.use(requireUser);
 
-router.get("/:id", async(req, res) => {
+router.get("/:id", async (req, res) => {
   const movieId = req.params.id;
   const reservation = await getReservation(movieId, req.user.id);
   res.send(reservation);
-}); 
+});
 
 /** add movie and user to reservations */
 router.post("/", requireBody(["movieId"]), async (req, res) => {
   const { movieId } = req.body;
-  const reservation = await createReservation(movieId, req.user.id);
+  const reservation = await createReservation(
+    movieId,
+    req.user.id,
+    true,
+    false,
+  );
   res.status(201).send(reservation);
+});
+
+/** Updates the is_watched property in Reservations Table */
+router.put("/", requireBody(["movieId", "watched"]), async (req, res) => {
+  const { movieId, watched } = req.body;
+  const response = await updateWatched(watched, req.user.id, movieId);
+  res.send(response);
 });
 
 /** delete the reservation from table */
