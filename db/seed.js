@@ -1,6 +1,6 @@
 import db from "#db/client";
 import { createUser } from "#db/queries/users";
-import { addToMovies } from "#db/queries/movies";
+import { createMovie } from "#db/queries/movies";
 import { createReservation } from "./queries/reservations";
 
 const movies = [
@@ -387,7 +387,7 @@ console.log("🌱 Database seeded.");
   for (let i = 0; i < movies.length; i++) {
     const singleMovie = movies[i];
 
-    await addToMovies(
+    await createMovie(
       singleMovie.title,
       singleMovie.year,
       singleMovie.rating,
@@ -402,7 +402,7 @@ async function seed() {
 
   for (let i = 0; i < movies.length; i++) {
     const singleMovie = movies[i];
-    const addedMovie = await addToMovies(
+    await createMovie(
       singleMovie.title,
       singleMovie.year,
       singleMovie.rating,

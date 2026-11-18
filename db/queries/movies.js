@@ -1,6 +1,6 @@
 import db from "#db/client";
 
-export async function addToMovies(title, year, rating, poster) {
+export async function createMovie(title, year, rating, poster) {
   const sql = `
   INSERT INTO movies
     (title, year, rating, poster)
