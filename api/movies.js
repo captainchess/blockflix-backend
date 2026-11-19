@@ -8,6 +8,7 @@ import {
   getMovies,
   getMoviesInReservationsByUserId,
   getMovieInReservations,
+  getWatchedMovies,
 } from "#db/queries/movies";
 
 router.use(requireUser);
@@ -22,6 +23,13 @@ router.get("/reservations", async (req, res) => {
   const movies = await getMoviesInReservationsByUserId(req.user.id);
   res.send(movies);
 });
+
+/** get the users watched movies */
+router.get("/history", async (req, res) => {
+  const watchedMovies = await getWatchedMovies(req.user.id);
+  if(!watchedMovies) return res.send("No movies watched.");
+  res.send(watchedMovies);
+})
 
 router.param("id", async (req, res, next, id) => {
   const movie = await getMovieById(id);

@@ -54,3 +54,15 @@ export async function getMovieInReservations(userId, movieId) {
   const { rows: [movie] } = await db.query(sql, [userId, movieId]);
   return movie;
 }
+
+export async function getWatchedMovies(userId) {
+  const sql = `
+  SELECT movies.* FROM movies
+  JOIN reservations ON movies.id = reservations.movie_id
+  WHERE user_id = $1
+  AND is_watched = true
+  `;
+  const { rows: movies } = await db.query(sql, [userId, movieId]);
+  if (!movies) return null;
+  return movies;
+}
