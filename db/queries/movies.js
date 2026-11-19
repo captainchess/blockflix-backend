@@ -34,7 +34,7 @@ export async function getMovieById(id) {
 
 export async function getMoviesInReservationsByUserId(userId) {
   const sql = `
-  SELECT movies.* FROM movies
+  SELECT movies.*, reservations.is_watched FROM movies
   JOIN reservations ON movies.id = reservations.movie_id
   WHERE user_id = $1
   `;
