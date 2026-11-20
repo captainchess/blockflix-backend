@@ -39,7 +39,7 @@ router.put("/", requireBody(["movieId", "watched"]), async (req, res) => {
 });
 
 /** delete the reservation from table */
-router.delete("/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const movieId = req.params.id;
   const userId = req.user.id;
   await deleteReservationById(userId, movieId);

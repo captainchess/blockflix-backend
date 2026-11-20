@@ -1,6 +1,8 @@
+/*
 DROP TABLE IF EXISTS reservations;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS movies;
+*/
 
 CREATE TABLE users (
   id serial PRIMARY KEY,

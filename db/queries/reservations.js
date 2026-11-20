@@ -47,9 +47,12 @@ export async function updateWatched(watched, userId, movieId) {
 
 export async function deleteReservationById(userId, movieId) {
   const sql = `
-  DELETE FROM reservations
+  UPDATE reservations
+  SET is_reserved = false
   WHERE user_id = $1
   AND movie_id = $2
+  RETURNING *
   `;
-  await db.query(sql, [userId, movieId]);
+  const {rows: [reservation]} = await db.query(sql, [userId, movieId]);
+  return reservation;
 }

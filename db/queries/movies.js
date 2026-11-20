@@ -37,6 +37,7 @@ export async function getMoviesInReservationsByUserId(userId) {
   SELECT movies.*, reservations.is_watched FROM movies
   JOIN reservations ON movies.id = reservations.movie_id
   WHERE user_id = $1
+  AND is_reserved = true
   `;
   const { rows: movies } = await db.query(sql, [userId]);
   if (!movies) return null;
@@ -62,7 +63,7 @@ export async function getWatchedMovies(userId) {
   WHERE user_id = $1
   AND is_watched = true
   `;
-  const { rows: movies } = await db.query(sql, [userId, movieId]);
+  const { rows: movies } = await db.query(sql, [userId]);
   if (!movies) return null;
   return movies;
 }
