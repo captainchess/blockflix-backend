@@ -53,6 +53,22 @@ export async function deleteReservationById(userId, movieId) {
   AND movie_id = $2
   RETURNING *
   `;
-  const {rows: [reservation]} = await db.query(sql, [userId, movieId]);
+  const {
+    rows: [reservation],
+  } = await db.query(sql, [userId, movieId]);
+  return reservation;
+}
+
+export async function updateMovieInReservations(userId, movieId) {
+  const sql = `
+  UPDATE reservations
+  SET is_reserved = true
+  WHERE user_id = $1
+  AND movie_id = $2
+  RETURNING *
+  `;
+  const {
+    rows: [reservation],
+  } = await db.query(sql, [userId, movieId]);
   return reservation;
 }

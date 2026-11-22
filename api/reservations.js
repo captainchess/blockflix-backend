@@ -8,8 +8,10 @@ import {
   createReservation,
   deleteReservationById,
   getReservation,
-  updateWatched
+  updateMovieInReservations,
+  updateWatched,
 } from "#db/queries/reservations";
+import { getMovieInReservations } from "#db/queries/movies";
 
 router.use(requireUser);
 
@@ -22,13 +24,22 @@ router.get("/:id", async (req, res) => {
 /** add movie and user to reservations */
 router.post("/", requireBody(["movieId"]), async (req, res) => {
   const { movieId } = req.body;
-  const reservation = await createReservation(
-    movieId,
-    req.user.id,
-    true,
-    false,
-  );
-  res.status(201).send(reservation);
+  // Check if this movie is already in the reservations table
+  // If it is, just update the is_reserved property on that row
+  const reservedMovie = await getMovieInReservations(req.user.id, movieId);
+
+  if (!reservedMovie) {
+    const reservation = await createReservation(
+      movieId,
+      req.user.id,
+      true,
+      false,
+    );
+    res.status(201).send(reservation);
+  } else {
+    const reservation = await updateMovieInReservations(req.user.id, movieId);
+    res.send(reservation);
+  }
 });
 
 /** Updates the is_watched property in Reservations Table */
