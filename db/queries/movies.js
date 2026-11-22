@@ -38,6 +38,7 @@ export async function getMoviesInReservationsByUserId(userId) {
   JOIN reservations ON movies.id = reservations.movie_id
   WHERE user_id = $1
   AND is_reserved = true
+  ORDER BY movies.id DESC
   `;
   const { rows: movies } = await db.query(sql, [userId]);
   if (!movies) return null;
