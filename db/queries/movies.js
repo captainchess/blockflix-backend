@@ -28,7 +28,9 @@ export async function getMovieById(id) {
   FROM movies
   WHERE id = $1
   `;
-  const { rows: [movie] } = await db.query(sql, [id]);
+  const {
+    rows: [movie],
+  } = await db.query(sql, [id]);
   return movie;
 }
 
@@ -38,6 +40,7 @@ export async function getMoviesInReservationsByUserId(userId) {
   JOIN reservations ON movies.id = reservations.movie_id
   WHERE user_id = $1
   AND is_reserved = true
+  ORDER BY movies.id DESC
   `;
   const { rows: movies } = await db.query(sql, [userId]);
   if (!movies) return null;
@@ -50,9 +53,10 @@ export async function getMovieInReservations(userId, movieId) {
   JOIN reservations ON movies.id = reservations.movie_id
   WHERE user_id = $1
   AND movie_id = $2
-  AND is_reserved = true
   `;
-  const { rows: [movie] } = await db.query(sql, [userId, movieId]);
+  const {
+    rows: [movie],
+  } = await db.query(sql, [userId, movieId]);
   return movie;
 }
 
